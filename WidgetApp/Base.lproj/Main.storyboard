@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v6d-oO-t8d">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="r9b-NN-W9c">
+            <objects>
+                <viewController wantsFullScreenLayout="YES" id="v6d-oO-t8d" customClass="ViewController" customModule="SMMarketsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xr5-rh-IbM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6c-vj-6XW">
+                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="zMG-Vz-M8a">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxZ-F4-CO4">
+                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
+                                <subviews>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoInternet" translatesAutoresizingMaskIntoConstraints="NO" id="t92-7C-Itg">
+                                        <rect key="frame" x="74" y="172" width="266" height="375"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="375" id="pVw-po-OjX"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="t92-7C-Itg" firstAttribute="top" secondItem="fxZ-F4-CO4" secondAttribute="top" constant="172" id="e1s-rh-s56"/>
+                                    <constraint firstItem="t92-7C-Itg" firstAttribute="centerX" secondItem="fxZ-F4-CO4" secondAttribute="centerX" id="p0G-Tz-lPX"/>
+                                    <constraint firstItem="t92-7C-Itg" firstAttribute="leading" secondItem="fxZ-F4-CO4" secondAttribute="leading" constant="74" id="rWj-Pm-4el"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9f-PB-Fy5">
+                                <rect key="frame" x="80" y="820" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="4M8-0y-OMg"/>
+                                    <constraint firstAttribute="height" constant="30" id="y0Y-hv-rv5"/>
+                                </constraints>
+                                <state key="normal" image="house" catalog="system"/>
+                                <state key="highlighted" image="house" catalog="system"/>
+                                <connections>
+                                    <action selector="refreshPressed:" destination="v6d-oO-t8d" eventType="touchUpInside" id="efM-dK-38f"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JQm-K3-JIj">
+                                <rect key="frame" x="304" y="820" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7oe-kC-6Dm"/>
+                                    <constraint firstAttribute="width" constant="30" id="yGC-9v-22T"/>
+                                </constraints>
+                                <state key="normal" image="arrow.clockwise" catalog="system"/>
+                                <connections>
+                                    <action selector="homePressed:" destination="v6d-oO-t8d" eventType="touchUpInside" id="Bt7-Kq-DEr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MfY-2f-c2a"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fxZ-F4-CO4" firstAttribute="leading" secondItem="MfY-2f-c2a" secondAttribute="leading" id="160-fQ-zdt"/>
+                            <constraint firstItem="zMG-Vz-M8a" firstAttribute="centerX" secondItem="xr5-rh-IbM" secondAttribute="centerX" id="2r4-Ja-Ecg"/>
+                            <constraint firstItem="MfY-2f-c2a" firstAttribute="bottom" secondItem="V6c-vj-6XW" secondAttribute="bottom" constant="50" id="7xp-Rs-QOO"/>
+                            <constraint firstItem="zMG-Vz-M8a" firstAttribute="centerY" secondItem="xr5-rh-IbM" secondAttribute="centerY" id="Ctb-BJ-NI6"/>
+                            <constraint firstItem="MfY-2f-c2a" firstAttribute="bottom" secondItem="JQm-K3-JIj" secondAttribute="bottom" constant="12" id="IFm-jg-dRT"/>
+                            <constraint firstItem="MfY-2f-c2a" firstAttribute="bottom" secondItem="fxZ-F4-CO4" secondAttribute="bottom" constant="50" id="d1t-e9-aHZ"/>
+                            <constraint firstItem="MfY-2f-c2a" firstAttribute="trailing" secondItem="fxZ-F4-CO4" secondAttribute="trailing" id="dLW-4e-zeM"/>
+                            <constraint firstItem="V6c-vj-6XW" firstAttribute="top" secondItem="MfY-2f-c2a" secondAttribute="top" id="djN-zV-WFQ"/>
+                            <constraint firstItem="V6c-vj-6XW" firstAttribute="leading" secondItem="MfY-2f-c2a" secondAttribute="leading" id="mvD-Pa-A61"/>
+                            <constraint firstItem="MfY-2f-c2a" firstAttribute="trailing" secondItem="JQm-K3-JIj" secondAttribute="trailing" constant="80" id="n3j-zg-629"/>
+                            <constraint firstItem="fxZ-F4-CO4" firstAttribute="top" secondItem="MfY-2f-c2a" secondAttribute="top" id="oYr-JQ-FN9"/>
+                            <constraint firstItem="MfY-2f-c2a" firstAttribute="trailing" secondItem="V6c-vj-6XW" secondAttribute="trailing" id="qun-sR-c9C"/>
+                            <constraint firstItem="U9f-PB-Fy5" firstAttribute="leading" secondItem="MfY-2f-c2a" secondAttribute="leading" constant="80" id="v0W-jk-0ap"/>
+                            <constraint firstItem="U9f-PB-Fy5" firstAttribute="centerY" secondItem="JQm-K3-JIj" secondAttribute="centerY" id="wwd-oA-GQN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="indicator" destination="zMG-Vz-M8a" id="8AY-ea-ztv"/>
+                        <outlet property="noInternet" destination="fxZ-F4-CO4" id="5Tg-tz-y1e"/>
+                        <outlet property="webV" destination="V6c-vj-6XW" id="nIK-vn-poo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8bN-Ab-rpr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4976.8000000000002" y="172.26386806596702"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="NoInternet" width="1332" height="1604"/>
+        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
+        <image name="house" catalog="system" width="128" height="106"/>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "c5477d3cdca39150191eb6cb212d72e0_download-home-icon-png-white-graphic-transparent-download-home-_980-980.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "c5477d3cdca39150191eb6cb212d72e0_download-home-icon-png-white-graphic-transparent-download-home-_980-981.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "c5477d3cdca39150191eb6cb212d72e0_download-home-icon-png-white-graphic-transparent-download-home-_980-982.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
