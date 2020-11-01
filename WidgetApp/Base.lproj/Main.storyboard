@@ -11,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="r9b-NN-W9c">
             <objects>
-                <viewController wantsFullScreenLayout="YES" id="v6d-oO-t8d" customClass="ViewController" customModule="SMMarketsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController wantsFullScreenLayout="YES" id="v6d-oO-t8d" customClass="ViewController" customModule="WidgetApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xr5-rh-IbM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -95,13 +95,75 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8bN-Ab-rpr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4976.8000000000002" y="172.26386806596702"/>
+            <point key="canvasLocation" x="5348" y="145"/>
+        </scene>
+        <!--DateVC-->
+        <scene sceneID="rrg-qU-5Gq">
+            <objects>
+                <viewController storyboardIdentifier="DateVC" id="lPW-bk-d2g" customClass="DateVC" customModule="WidgetApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vkQ-gQ-die">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="bIs-C0-4LD">
+                                <rect key="frame" x="52" y="293" width="311" height="311"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="bIs-C0-4LD" secondAttribute="height" multiplier="1:1" id="dkj-f2-kh3"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="dataPickerPicked:" destination="lPW-bk-d2g" eventType="valueChanged" id="9cW-Km-OGb"/>
+                                </connections>
+                            </datePicker>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DJo-62-gDe">
+                                <rect key="frame" x="52" y="235" width="310.5" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVc-Jy-gxc">
+                                <rect key="frame" x="52" y="617.5" width="310.5" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="NKb-pM-v9n"/>
+                                </constraints>
+                                <state key="normal" title="Save Info">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="savePressed:" destination="lPW-bk-d2g" eventType="touchUpInside" id="fqd-CQ-Clr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gV6-4W-taX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rVc-Jy-gxc" firstAttribute="top" secondItem="bIs-C0-4LD" secondAttribute="bottom" constant="14" id="EEI-dx-Ody"/>
+                            <constraint firstItem="bIs-C0-4LD" firstAttribute="top" secondItem="DJo-62-gDe" secondAttribute="bottom" constant="24" id="POq-n6-ijx"/>
+                            <constraint firstItem="DJo-62-gDe" firstAttribute="centerX" secondItem="gV6-4W-taX" secondAttribute="centerX" id="RUP-BR-Cjh"/>
+                            <constraint firstItem="DJo-62-gDe" firstAttribute="width" secondItem="bIs-C0-4LD" secondAttribute="width" id="V5c-5l-LMk"/>
+                            <constraint firstItem="bIs-C0-4LD" firstAttribute="centerY" secondItem="vkQ-gQ-die" secondAttribute="centerY" id="bKT-Vg-Mvj"/>
+                            <constraint firstItem="bIs-C0-4LD" firstAttribute="width" secondItem="vkQ-gQ-die" secondAttribute="width" multiplier="0.75" id="l7s-p7-Zls"/>
+                            <constraint firstItem="rVc-Jy-gxc" firstAttribute="width" secondItem="bIs-C0-4LD" secondAttribute="width" id="qx3-Vi-3NV"/>
+                            <constraint firstItem="bIs-C0-4LD" firstAttribute="centerX" secondItem="vkQ-gQ-die" secondAttribute="centerX" id="vvU-0e-qYK"/>
+                            <constraint firstItem="rVc-Jy-gxc" firstAttribute="centerX" secondItem="bIs-C0-4LD" secondAttribute="centerX" id="x0a-Ub-hFz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="datePick" destination="bIs-C0-4LD" id="RzU-Oi-Yvz"/>
+                        <outlet property="textData" destination="DJo-62-gDe" id="A4X-HK-BBE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JTe-LB-Vkj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6233" y="145"/>
         </scene>
     </scenes>
     <resources>
         <image name="NoInternet" width="1332" height="1604"/>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="house" catalog="system" width="128" height="106"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemGroupedBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

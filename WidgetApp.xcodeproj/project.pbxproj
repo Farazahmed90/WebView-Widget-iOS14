@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		560EF353254EAEE8002F99E3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560EF352254EAEE8002F99E3 /* Extensions.swift */; };
+		560EF358254EAF74002F99E3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560EF352254EAEE8002F99E3 /* Extensions.swift */; };
+		5628DDF4252D9D6C000FF8F0 /* DateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628DDF3252D9D6C000FF8F0 /* DateVC.swift */; };
+		5628DDF9252DA00C000FF8F0 /* DateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628DDF3252D9D6C000FF8F0 /* DateVC.swift */; };
+		563AAD9F252B009000346751 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5678FE8225270342004DCD26 /* ViewController.swift */; };
 		5678FE7F25270342004DCD26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5678FE7E25270342004DCD26 /* AppDelegate.swift */; };
 		5678FE8125270342004DCD26 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5678FE8025270342004DCD26 /* SceneDelegate.swift */; };
 		5678FE8325270342004DCD26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5678FE8225270342004DCD26 /* ViewController.swift */; };
@@ -62,6 +67,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		560EF352254EAEE8002F99E3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		5628DDF3252D9D6C000FF8F0 /* DateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateVC.swift; sourceTree = "<group>"; };
+		5628DDFE252DA6CC000FF8F0 /* WidgetApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetApp.entitlements; sourceTree = "<group>"; };
+		5628DE10252DB0A3000FF8F0 /* WebWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebWidgetExtension.entitlements; sourceTree = "<group>"; };
 		5678FE7B25270342004DCD26 /* WidgetApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WidgetApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5678FE7E25270342004DCD26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5678FE8025270342004DCD26 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +130,7 @@
 		5678FE7225270342004DCD26 = {
 			isa = PBXGroup;
 			children = (
+				5628DE10252DB0A3000FF8F0 /* WebWidgetExtension.entitlements */,
 				5678FE7D25270342004DCD26 /* WidgetApp */,
 				5678FE9425270345004DCD26 /* WidgetAppTests */,
 				5678FE9F25270345004DCD26 /* WidgetAppUITests */,
@@ -144,6 +154,7 @@
 		5678FE7D25270342004DCD26 /* WidgetApp */ = {
 			isa = PBXGroup;
 			children = (
+				5628DDFE252DA6CC000FF8F0 /* WidgetApp.entitlements */,
 				5678FE7E25270342004DCD26 /* AppDelegate.swift */,
 				5678FE8025270342004DCD26 /* SceneDelegate.swift */,
 				5678FE8225270342004DCD26 /* ViewController.swift */,
@@ -151,6 +162,8 @@
 				5678FE8725270345004DCD26 /* Assets.xcassets */,
 				5678FE8925270345004DCD26 /* LaunchScreen.storyboard */,
 				5678FE8C25270345004DCD26 /* Info.plist */,
+				5628DDF3252D9D6C000FF8F0 /* DateVC.swift */,
+				560EF352254EAEE8002F99E3 /* Extensions.swift */,
 			);
 			path = WidgetApp;
 			sourceTree = "<group>";
@@ -210,6 +223,8 @@
 				5678FEC22527036B004DCD26 /* PBXTargetDependency */,
 			);
 			name = WidgetApp;
+			packageProductDependencies = (
+			);
 			productName = WidgetApp;
 			productReference = 5678FE7B25270342004DCD26 /* WidgetApp.app */;
 			productType = "com.apple.product-type.application";
@@ -263,6 +278,8 @@
 			dependencies = (
 			);
 			name = WebWidgetExtension;
+			packageProductDependencies = (
+			);
 			productName = WebWidgetExtension;
 			productReference = 5678FEB52527036A004DCD26 /* WebWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -354,8 +371,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				560EF353254EAEE8002F99E3 /* Extensions.swift in Sources */,
 				5678FE8325270342004DCD26 /* ViewController.swift in Sources */,
 				5678FE7F25270342004DCD26 /* AppDelegate.swift in Sources */,
+				5628DDF4252D9D6C000FF8F0 /* DateVC.swift in Sources */,
 				5678FE8125270342004DCD26 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,7 +399,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5628DDF9252DA00C000FF8F0 /* DateVC.swift in Sources */,
+				563AAD9F252B009000346751 /* ViewController.swift in Sources */,
 				5678FEBD2527036A004DCD26 /* WebWidget.swift in Sources */,
+				560EF358254EAF74002F99E3 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +568,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PP8FB3H634;
 				INFOPLIST_FILE = WidgetApp/Info.plist;
@@ -553,7 +576,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.haroSoft.app.WidgetApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haroSoft.app.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -566,6 +589,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PP8FB3H634;
 				INFOPLIST_FILE = WidgetApp/Info.plist;
@@ -573,7 +597,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.haroSoft.app.WidgetApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haroSoft.app.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -669,6 +693,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WebWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PP8FB3H634;
 				INFOPLIST_FILE = WebWidget/Info.plist;
@@ -677,7 +702,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.haroSoft.app.WidgetApp.WebWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haroSoft.app.widget.WebWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -690,6 +715,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WebWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PP8FB3H634;
 				INFOPLIST_FILE = WebWidget/Info.plist;
@@ -698,7 +724,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.haroSoft.app.WidgetApp.WebWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haroSoft.app.widget.WebWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

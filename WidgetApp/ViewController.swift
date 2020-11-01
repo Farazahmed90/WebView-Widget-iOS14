@@ -7,8 +7,17 @@
 
 import UIKit
 import WebKit
+import Photos
+import AssetsLibrary
+import WidgetKit
 
-class ViewController: UIViewController,WKNavigationDelegate {
+class ViewController: UIViewController {
+    
+    static var imageOfWeb: UIImage?
+    var url: URL?
+    var imageData: Data?
+    static var lastImage: UIImage?
+    var urlTextField = "https://ios-widgets.vercel.app/"
     
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var webV: WKWebView!
@@ -23,24 +32,23 @@ class ViewController: UIViewController,WKNavigationDelegate {
     }
     
     func homePress() {
-       let urlString:String = "https://www.google.com/"
-       let url:URL = URL(string: urlString)!
-       let urlRequest:URLRequest = URLRequest(url: url)
-       webV.load(urlRequest)
-       self.webV.addSubview(self.indicator)
-       self.indicator.style = .whiteLarge
-       self.indicator.color = .blue
-       self.indicator.startAnimating()
-       self.webV.navigationDelegate = self
-       self.indicator.hidesWhenStopped = true
+        let urlString:String = "https://ios-widgets.vercel.app/"
+        let url:URL = URL(string: urlString)!
+        let urlRequest:URLRequest = URLRequest(url: url)
+        webV.load(urlRequest)
+        self.webV.addSubview(self.indicator)
+        self.indicator.style = .whiteLarge
+        self.indicator.color = .blue
+        self.indicator.startAnimating()
+        self.webV.navigationDelegate = self
+        self.indicator.hidesWhenStopped = true
     }
-    var urlTextField = "https://www.google.com/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.navigationController?.isNavigationBarHidden = true
-      // self.webV.scrollView.delegate = self
-      // add activity
+        ViewController.loadLastImageThumb { (image) in
+            ViewController.lastImage = image
+        }
     }
     
     func showIndicator(show: Bool) {
@@ -52,11 +60,10 @@ class ViewController: UIViewController,WKNavigationDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // Do any additional setup after loading the view, typically from a nib.
         if Reachability.isConnectedToNetwork() == true {
             noInternet.isHidden = true
             print("Internet connection OK")
-            let urlString:String = "https://www.google.com/"
+            let urlString:String = "https://ios-widgets.vercel.app/"
             let url:URL = URL(string: urlString)!
             let urlRequest:URLRequest = URLRequest(url: url)
             webV.load(urlRequest)
@@ -66,12 +73,9 @@ class ViewController: UIViewController,WKNavigationDelegate {
             self.indicator.startAnimating()
             self.webV.navigationDelegate = self
             self.indicator.hidesWhenStopped = true
-            //Camera
-            
             
         } else {
             print("Internet connection FAILED")
-            
             let alert = UIAlertController(title: "No internet connection", message: "Make sure that your device is connected to the Internet.", preferredStyle: .alert)
             let okButtonAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alert.addAction(okButtonAction)
@@ -82,19 +86,37 @@ class ViewController: UIViewController,WKNavigationDelegate {
         }
     }
     
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        showIndicator(show: true)
-    }
-
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        showIndicator(show: false)
-        urlTextField = (webView.url?.absoluteString)!
+    func isAppAlreadyLaunchedOnce()->Bool{
+        let defaults = UserDefaults.standard
+        if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
+            print("App already launched : \(isAppAlreadyLaunchedOnce)")
+            return true
+        }else{
+            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+            print("App launched first time")
+            UserDefaults().set(self.imageData, forKey: "image")
+            ViewController.loadLastImageThumb { (image) in
+                ViewController.lastImage = image
+            }
+            return false
+        }
     }
     
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        showIndicator(show: false)
+    func saveImage(image: UIImage) -> Bool {
+        guard let data = image.jpegData(compressionQuality: 1) ?? image.pngData() else {
+            return false
+        }
+        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
+            return false
+        }
+        do {
+            try data.write(to: directory.appendingPathComponent("fileName.png")!)
+            return true
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -104,50 +126,71 @@ class ViewController: UIViewController,WKNavigationDelegate {
     override var prefersStatusBarHidden: Bool{
         return true
     }
-    
-}
-import SystemConfiguration
-
-public class Reachability {
-    
-    class func isConnectedToNetwork() -> Bool {
+    func fetchLatestPhotos(forCount count: Int?) -> PHFetchResult<PHAsset> {
+        // Create fetch options.
+        let options = PHFetchOptions()
         
-        var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
-        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
-        zeroAddress.sin_family = sa_family_t(AF_INET)
+        // If count limit is specified.
+        if let count = count { options.fetchLimit = count }
         
-        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
-            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
-                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
-            }
+        // Add sortDescriptor so the lastest photos will be returned.
+        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+        options.sortDescriptors = [sortDescriptor]
+        
+        // Fetch the photos.
+        return PHAsset.fetchAssets(with: .image, options: options)
+        
+    }
+    static func loadLastImageThumb(completion: @escaping (UIImage) -> ()) {
+        let imgManager = PHImageManager.default()
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.fetchLimit = 1
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
+        
+        let fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
+        
+        if let last = fetchResult.lastObject {
+            let scale = UIScreen.main.scale
+            let size = CGSize(width: 100 * scale, height: 100 * scale)
+            let options = PHImageRequestOptions()
+            
+            
+            imgManager.requestImage(for: last, targetSize: size, contentMode: PHImageContentMode.aspectFill, options: options, resultHandler: { (image, _) in
+                if let image = image {
+                    completion(image)
+                }
+            })
         }
-        
-        var flags: SCNetworkReachabilityFlags = SCNetworkReachabilityFlags(rawValue: 0)
-        if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == false {
-            return false
-        }
-        
-        /* Only Working for WIFI
-         let isReachable = flags == .reachable
-         let needsConnection = flags == .connectionRequired
-         
-         return isReachable && !needsConnection
-         */
-        
-        // Working for Cellular and WIFI
-        let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
-        let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
-        let ret = (isReachable && !needsConnection)
-        
-        return ret
         
     }
 }
-
-//extension ViewController: UIScrollViewDelegate {
-//   func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
-//      scrollView.pinchGestureRecognizer?.isEnabled = false
-//   }
-//}
-
-
+extension ViewController: WKNavigationDelegate{
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        showIndicator(show: false)
+    }
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        showIndicator(show: true)
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        showIndicator(show: false)
+        urlTextField = (webView.url?.absoluteString)!
+        webView.sizeToFit()
+        UIGraphicsBeginImageContext(webView.frame.size)
+        webView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let previewImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        ViewController.imageOfWeb = previewImage
+        let croppedRect = CGRect(x: 0, y: 0, width: 300, height: 280)
+        UserDefaults.group.setImage(image: previewImage?.cropBottom(to: croppedRect), forKey: "photo")
+        WidgetCenter.shared.reloadAllTimelines()
+        let yourDataImagePNG = previewImage!.pngData()
+        self.imageData = yourDataImagePNG
+        self.isAppAlreadyLaunchedOnce()
+        saveImage(image: previewImage!)
+        previewImage?.saveToPhotoLibrary(completion: { (url) in
+            print(url)
+        })
+    }
+}
